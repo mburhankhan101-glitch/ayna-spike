@@ -1,0 +1,30 @@
+# Real faces. These never go into version control.
+#
+# The photos in images/, images-acne/ and images-acne-tight/ are of real
+# people who sent them so a vendor could be evaluated. That is not consent to
+# publish them, and a git history is permanent in a way a folder is not: once
+# pushed, a face is recoverable from the history even after the file is
+# deleted.
+#
+# The manifests are kept. They record which Fitzpatrick band each image was
+# assigned and what the vendor returned, which is the part that carries the
+# evidence -- the finding survives without the face.
+images/*.jpg
+images/*.jpeg
+images/*.png
+images-acne/*.jpg
+images-acne/*.jpeg
+images-acne-tight/*.jpg
+images-acne-tight/*.jpeg
+images-smoke/*.jpg
+images-smoke/*.jpeg
+!**/manifest.csv
+
+# Raw vendor responses contain the SAME faces, base64-encoded inside
+# `face_maps`. Excluding the photos while committing these would publish the
+# faces in a less obvious format, which is worse, not better.
+results/raw/
+results/maps/
+
+# Build output
+*.exe
