@@ -1,7 +1,15 @@
 # ayna-spike — AI provider evaluation harness
 
+> Part of a four-repo project:
+> **[ayna-spike](https://github.com/mburhankhan101-glitch/ayna-spike)** (you are here) ·
+> [ayna-backend](https://github.com/mburhankhan101-glitch/ayna-backend) ·
+> [ayna-app](https://github.com/mburhankhan101-glitch/ayna-app) ·
+> [ayna-docs](https://github.com/mburhankhan101-glitch/ayna-docs)
+>
+> The conclusion this harness produced is [ADR-003](https://github.com/mburhankhan101-glitch/ayna-docs/blob/main/06-AI-Provider-Evaluation.md).
+
 Throwaway code with a single job: find out whether any affordable vision API
-can actually deliver the report [FR-4 / FR-5](../files/01-Product-Vision-and-Requirements.md)
+can actually deliver the report [FR-4 / FR-5](https://github.com/mburhankhan101-glitch/ayna-docs/blob/main/01-Product-Vision-and-Requirements.md)
 promises, **for the skin tones this product is aimed at**, before a line of
 `ayna-backend` gets written.
 
@@ -16,6 +24,26 @@ confidence, a pixel heatmap, and a skin age. Every downstream artifact — the
 `SkinReport` aggregate, the event payload, the report screen, the unit
 economics in NFR-7 — inherits that assumption. If it is wrong, none of them
 survive contact with a real vendor.
+
+## The images are not in this repository
+
+`images/`, `images-acne/` and `images-acne-tight/` hold only their
+`manifest.csv`. The photographs are of real people who sent them so a vendor
+could be evaluated, and that is not consent to publish them. `results/raw/` and
+`results/maps/` are excluded for the same reason — the raw responses carry the
+same faces base64-encoded inside `face_maps`, so committing those while
+excluding the JPEGs would publish them in a form nobody thinks to check.
+
+Git history is permanent in a way a folder is not: once pushed, a face stays
+recoverable from the history even after the file is deleted. So this had to be
+right in the first commit rather than fixed later.
+
+What survives is the part that carries the evidence. The manifests record which
+Fitzpatrick band each image was assigned, `results/observations.json` holds
+what each provider returned, and `results/report.md` is the written comparison.
+The finding stands without the face.
+
+To run it yourself, supply your own images and write a matching manifest.
 
 ## Setup
 
@@ -155,7 +183,7 @@ rewording — that is a product finding, and it is worth more than the scorecard
 ## Known limits
 
 `Provider` is deliberately the same shape as the `AIAnalysisProvider` port in
-[03-DDD](../files/03-DDD-and-Onion-Architecture.md). If a real vendor cannot sit
+[03-DDD](https://github.com/mburhankhan101-glitch/ayna-docs/blob/main/03-DDD-and-Onion-Architecture.md). If a real vendor cannot sit
 behind it, the port is wrong — and learning that here is much cheaper than
 learning it inside `internal/modules/skinanalysis`.
 
